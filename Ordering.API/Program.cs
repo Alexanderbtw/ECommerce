@@ -73,9 +73,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 //builder.Services.AddDbContext<OrderingContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register dependencies
-builder.Services.AddMediatR(typeof(CreateCustomerCommandHandler).GetTypeInfo().Assembly);
-builder.Services.AddMediatR(typeof(CreateUserCommandHandler).GetTypeInfo().Assembly);
-
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommandHandler>());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateUserCommandHandler>());
 
 //Enable CORS//Cross site resource sharing
 builder.Services.AddCors(options =>
