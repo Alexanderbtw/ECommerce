@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.Commands.Role;
@@ -21,6 +23,7 @@ namespace Ordering.API.Controllers
 
         [HttpPost]
         [ProducesDefaultResponseType(typeof(int))]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         public async Task<ActionResult> CreateRoleAsync(RoleCreateCommand command)
         {
@@ -36,6 +39,7 @@ namespace Ordering.API.Controllers
 
         [HttpDelete("{id}")]
         [ProducesDefaultResponseType(typeof(int))]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<IActionResult> DeleteRoleAsync(string id)
         {
             return Ok(await _mediator.Send(new DeleteRoleCommand()

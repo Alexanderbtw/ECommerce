@@ -1,12 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Ordering.Application.Commands.User;
 using Ordering.Application.Commands.User.Create;
 using Ordering.Application.Commands.User.Delete;
 using Ordering.Application.DTOs;
 using Ordering.Application.Queries.User;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ordering.API.Controllers
 {
@@ -37,6 +37,7 @@ namespace Ordering.API.Controllers
 
         [HttpDelete("{userId}")]
         [ProducesDefaultResponseType(typeof(int))]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
             var result = await _mediator.Send(new DeleteUserCommand() { Id = userId});
@@ -45,6 +46,7 @@ namespace Ordering.API.Controllers
 
         [HttpGet("GetUserDetails/{userId}")]
         [ProducesDefaultResponseType(typeof(UserDetailsResponseDTO))]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetUserDetails(string userId)
         {
             var result = await _mediator.Send(new GetUserDetailsQuery() { UserId = userId });
@@ -53,7 +55,7 @@ namespace Ordering.API.Controllers
 
         [HttpPost("AssignRoles")]
         [ProducesDefaultResponseType(typeof(int))]
-
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> AssignRoles(AssignUsersRoleCommand command)
         {
             var result = await _mediator.Send(command);
@@ -62,6 +64,7 @@ namespace Ordering.API.Controllers
 
         [HttpGet("GetAllUserDetails")]
         [ProducesDefaultResponseType(typeof(UserDetailsResponseDTO))]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetAllUserDetails()
         {
             var result = await _mediator.Send(new GetAllUsersDetailsQuery());

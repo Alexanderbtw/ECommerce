@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +13,7 @@ namespace Ordering.API.Controllers
     [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin,Member")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;

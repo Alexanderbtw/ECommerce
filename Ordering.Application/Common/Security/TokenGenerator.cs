@@ -8,8 +8,8 @@ namespace Ordering.Application.Common.Security
 {
     public class TokenGenerator : ITokenGenerator
     {
-        private readonly string _userName = "mahedee";
-        private readonly string _password = "mahedee123";
+        private readonly string _userName;
+        private readonly string _password;
         private readonly string _key;
         private readonly string _issuer;
         private readonly string _audience;

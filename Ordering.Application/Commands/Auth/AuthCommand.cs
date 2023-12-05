@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Ordering.Application.Common.Exceptions;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Application.DTOs;
 using System;
@@ -32,8 +33,7 @@ namespace Ordering.Application.Commands.Auth
 
             if (!result)
             {
-                //throw new BadRequestException("Invalid username or password");
-                throw new Exception("Invalid user name or password");
+                throw new BadRequestException("Invalid username or password");
             }
 
             var (userId, userName, email, roles) = await _identityService.GetUserDetailsAsync(await _identityService.GetUserIdAsync(request.UserName));
@@ -48,7 +48,8 @@ namespace Ordering.Application.Commands.Auth
             {
                 UserId = userId,
                 Name = userName,
-                Token = token
+                Token = token,
+                Roles = roles
             };
         }
     }
