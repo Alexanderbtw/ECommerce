@@ -27,8 +27,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.UseUrls("http://0.0.0.0:7142");
 // Add services to the container.
-
 builder.Services.AddControllers();
 
 // For authentication
@@ -100,7 +100,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
+    c.AddServer(new OpenApiServer { Url = "https://localhost:7142/swagger" });
 
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Auth API",
+        Version = "v1",
+        Description = "API for authorization and authentification",
+    });
     // To enable authorization using swagger (Jwt)
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
@@ -116,28 +123,31 @@ builder.Services.AddSwaggerGen(c =>
     {
         {
             new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
                 {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        new string[] {}
-
-                    }
-                });
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 
 });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+app.UseSwagger();
+app.UseSwaggerUI(c => {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
+});
 
 app.UseHttpsRedirection();
 

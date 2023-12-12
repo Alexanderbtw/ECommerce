@@ -16,6 +16,11 @@ namespace Ordering.API.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Ok("Test ok");
+        }
 
         [HttpPost("Login")]
         [ProducesDefaultResponseType(typeof(AuthResponseDTO))]

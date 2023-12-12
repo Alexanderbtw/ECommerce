@@ -11,7 +11,7 @@ namespace Ordering.Infrastructure.Data
     {
         public OrderingContext(DbContextOptions<OrderingContext> options) : base (options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Customer> Customers { get; set; }
