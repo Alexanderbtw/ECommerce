@@ -5,7 +5,7 @@ using Ordering.Application.DTOs;
 
 namespace Ordering.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("auth/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
