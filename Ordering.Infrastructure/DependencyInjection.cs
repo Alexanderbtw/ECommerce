@@ -22,7 +22,7 @@ namespace Ordering.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<OrderingContext>(options => options.UseSqlite(configuration.GetConnectionString("DefaultConnection"),
+            services.AddDbContext<OrderingContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(typeof(OrderingContext).Assembly.FullName)
                 ));
 

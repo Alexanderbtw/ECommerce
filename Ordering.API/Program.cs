@@ -100,7 +100,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.AddServer(new OpenApiServer { Url = "https://localhost:7142/swagger" });
+    //c.AddServer(new OpenApiServer { Url = "https://localhost:7142/swagger" });
 
     c.SwaggerDoc("v1", new OpenApiInfo
     {

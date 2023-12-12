@@ -1,5 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Npgsql;
 using System.Data;
 
 namespace Ordering.Infrastructure.Data
@@ -17,7 +17,7 @@ namespace Ordering.Infrastructure.Data
         public IDbConnection CreateConnection()
         {
             string _connectionString = _configuration.GetConnectionString("DefaultConnection");
-            return new SqliteConnection(_connectionString);
+            return new NpgsqlConnection(_connectionString);
         }
     }
 }

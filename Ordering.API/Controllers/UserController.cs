@@ -55,7 +55,7 @@ namespace Ordering.API.Controllers
 
         [HttpPost("AssignRoles")]
         [ProducesDefaultResponseType(typeof(int))]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<ActionResult> AssignRoles(AssignUsersRoleCommand command)
         {
             var result = await _mediator.Send(command);
