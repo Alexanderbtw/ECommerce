@@ -6,6 +6,7 @@ EXPOSE 5142
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Ordering.API/nuget.config", "Ordering.API/"]
 COPY ["Ordering.API/Ordering.API.csproj", "Ordering.API/"]
 COPY ["Ordering.Application/Ordering.Application.csproj", "Ordering.Application/"]
 COPY ["Ordering.Core/Ordering.Core.csproj", "Ordering.Core/"]

@@ -16,7 +16,7 @@ namespace Ordering.Infrastructure.Data
 
         public IDbConnection CreateConnection()
         {
-            string _connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string _connectionString = Environment.GetEnvironmentVariable("ConnectionString");
             return new NpgsqlConnection(_connectionString);
         }
     }

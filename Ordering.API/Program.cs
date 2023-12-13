@@ -2,13 +2,18 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Ordering.Application.Commands.Auth;
 using Ordering.Application.Commands.Customers;
+using Ordering.Application.Commands.Role;
+using Ordering.Application.Commands.User.Create;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Application.Common.Security;
 using Ordering.Application.Handlers.CommandHandler;
 using Ordering.Application.Handlers.CommandHandler.User.Create;
+using Ordering.Application.Queries.Role;
 using Ordering.Core.Repositories.Command;
 using Ordering.Core.Repositories.Command.Base;
 using Ordering.Core.Repositories.Query;
@@ -63,11 +68,6 @@ builder.Services.AddSingleton<ITokenGenerator>(new TokenGenerator(_key, _issuer,
 
 // Include Infrastructur Dependency
 builder.Services.AddInfrastructure(builder.Configuration);
-
-
-
-// Configuration for Sqlite
-//builder.Services.AddDbContext<OrderingContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register dependencies
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommandHandler>());
@@ -158,7 +158,28 @@ app.UseCors("CorsPolicy");
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var mediator = scope.ServiceProvider.GetRequiredService<IMediator> ();
+
+    var ans = await mediator.Send(new GetRoleQuery());
+
+    if (ans == null || ans.Count == 0)
+    {
+        await mediator.Send(new RoleCreateCommand { RoleName = "Admin" });
+        await mediator.Send(new RoleCreateCommand { RoleName = "User" });
+
+        await mediator.Send(new CreateUserCommand
+        {
+            Email = "admin@gmail.com",
+            UserName = "Admin",
+            Password = "Admin@1",
+            ConfirmationPassword = "Admin@1",
+            Roles = ["Admin"]
+        });
+    }
+}
 
 app.Run();
