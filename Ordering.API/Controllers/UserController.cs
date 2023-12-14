@@ -10,7 +10,7 @@ using Ordering.Application.Queries.User;
 
 namespace Ordering.API.Controllers
 {
-    [Route("auth/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {

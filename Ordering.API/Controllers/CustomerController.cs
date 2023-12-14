@@ -11,7 +11,7 @@ using Ordering.Core.Entities;
 namespace Ordering.API.Controllers
 {
     [EnableCors("CorsPolicy")]
-    [Route("auth/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CustomerController : ControllerBase
