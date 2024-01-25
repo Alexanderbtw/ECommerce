@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Ordering.Application.Commands.Customers;
 using Ordering.Application.Commands.Role;
 using Ordering.Application.Commands.User.Create;
 using Ordering.Application.Common.Interfaces;
@@ -53,7 +52,6 @@ builder.Services.AddSingleton<ITokenGenerator>(new TokenGenerator(_key, _issuer,
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Register dependencies
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateCustomerCommandHandler>());
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreateUserCommandHandler>());
 
 //Enable CORS//Cross site resource sharing

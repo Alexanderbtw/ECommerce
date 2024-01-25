@@ -3,15 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ordering.Application.Common.Interfaces;
-using Ordering.Core.Repositories.Command;
 using Ordering.Core.Repositories.Command.Base;
-using Ordering.Core.Repositories.Query;
 using Ordering.Core.Repositories.Query.Base;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Identity;
-using Ordering.Infrastructure.Repository.Command;
 using Ordering.Infrastructure.Repository.Command.Base;
-using Ordering.Infrastructure.Repository.Query;
 using Ordering.Infrastructure.Repository.Query.Base;
 using Ordering.Infrastructure.Services;
 
@@ -53,10 +49,7 @@ namespace Ordering.Infrastructure
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddScoped(typeof(IQueryRepository<>), typeof(QueryRepository<>));
-            services.AddTransient<ICustomerQueryRepository, CustomerQueryRepository>();
             services.AddScoped(typeof(ICommandRepository<>), typeof(CommandRepository<>));
-            services.AddTransient<ICustomerCommandRepository, CustomerCommandRepository>();
-
 
             return services;
         }

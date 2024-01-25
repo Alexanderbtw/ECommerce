@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Ordering.Core.Entities;
 using Ordering.Infrastructure.Identity;
 
 namespace Ordering.Infrastructure.Data
@@ -11,9 +10,7 @@ namespace Ordering.Infrastructure.Data
     {
         public OrderingContext(DbContextOptions<OrderingContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
-
-        public DbSet<Customer> Customers { get; set; }
     }
 }
