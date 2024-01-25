@@ -10,12 +10,11 @@ using Ordering.Application.Handlers.CommandHandler.User.Create;
 using Ordering.Application.Queries.Role;
 using Ordering.Infrastructure;
 using System.Text;
-//using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.WebHost.UseUrls("http://0.0.0.0:7142");
-// Add services to the container.
+
 builder.Services.AddControllers();
 
 // For authentication
@@ -48,7 +47,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddSingleton<ITokenGenerator>(new TokenGenerator(_key, _issuer, _audience, _expirtyMinutes));
 //builder.Services.AddSingleton<ITokenGenerator>(new TokenGenerator(_key));
 
-// Include Infrastructur Dependency
+// Include Infrastructure Dependency
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Register dependencies
@@ -76,7 +75,6 @@ builder.Services.AddCors(options =>
 //    .AddEntityFrameworkStores<OrderingContext>()
 //    .AddDefaultTokenProviders();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
@@ -120,20 +118,18 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
+    });
+}
 
 app.UseHttpsRedirection();
 
-//Must be betwwen app.UseRouting() and app.UseEndPoints()
+//Must be between app.UseRouting() and app.UseEndPoints()
 app.UseCors("CorsPolicy");
 
 // Added for authentication
