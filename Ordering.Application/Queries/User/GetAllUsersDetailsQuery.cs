@@ -1,11 +1,6 @@
 ﻿using MediatR;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordering.Application.Queries.User
 {
@@ -25,7 +20,7 @@ namespace Ordering.Application.Queries.User
 
         public async Task<List<UserDetailsResponseDTO>> Handle(GetAllUsersDetailsQuery request, CancellationToken cancellationToken)
         {
-            
+
 
             var users = await _identityService.GetAllUsersAsync();
             var userDetails = users.Select(x => new UserDetailsResponseDTO()

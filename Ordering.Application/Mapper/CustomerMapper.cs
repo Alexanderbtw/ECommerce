@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
-using System;
 
 namespace Ordering.Application.Mapper
 {
     public class CustomerMapper
     {
-        private static readonly Lazy<IMapper> Lazy = new Lazy<IMapper>(()=>
+        private static readonly Lazy<IMapper> Lazy = new Lazy<IMapper>(() =>
         {
             var config = new MapperConfiguration(cfg =>
             {

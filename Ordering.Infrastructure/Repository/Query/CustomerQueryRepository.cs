@@ -3,18 +3,14 @@ using Microsoft.Extensions.Configuration;
 using Ordering.Core.Entities;
 using Ordering.Core.Repositories.Query;
 using Ordering.Infrastructure.Repository.Query.Base;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Ordering.Infrastructure.Repository.Query
 {
     // QueryRepository class for customer
     public class CustomerQueryRepository : QueryRepository<Customer>, ICustomerQueryRepository
     {
-        public CustomerQueryRepository(IConfiguration configuration) 
+        public CustomerQueryRepository(IConfiguration configuration)
             : base(configuration)
         {
 

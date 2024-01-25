@@ -40,7 +40,7 @@ namespace Ordering.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
-            var result = await _mediator.Send(new DeleteUserCommand() { Id = userId});
+            var result = await _mediator.Send(new DeleteUserCommand() { Id = userId });
             return Ok(result);
         }
 

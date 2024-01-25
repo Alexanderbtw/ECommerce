@@ -1,17 +1,12 @@
 ﻿using MediatR;
 using Ordering.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ordering.Application.Commands.User
 {
     public class AssignUsersRoleCommand : IRequest<int>
     {
         public string UserName { get; set; }
-        public IList<string> Roles { get; set;}
+        public IList<string> Roles { get; set; }
     }
 
     public class AssignUsersRoleCommandHandler : IRequestHandler<AssignUsersRoleCommand, int>

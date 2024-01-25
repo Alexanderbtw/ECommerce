@@ -2,9 +2,6 @@
 using Ordering.Application.Queries;
 using Ordering.Core.Entities;
 using Ordering.Core.Repositories.Query;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ordering.Application.Handlers.QueryHandlers
 {

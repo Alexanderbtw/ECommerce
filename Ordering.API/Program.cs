@@ -1,32 +1,15 @@
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Ordering.Application.Commands.Auth;
 using Ordering.Application.Commands.Customers;
 using Ordering.Application.Commands.Role;
 using Ordering.Application.Commands.User.Create;
 using Ordering.Application.Common.Interfaces;
 using Ordering.Application.Common.Security;
-using Ordering.Application.Handlers.CommandHandler;
 using Ordering.Application.Handlers.CommandHandler.User.Create;
 using Ordering.Application.Queries.Role;
-using Ordering.Core.Repositories.Command;
-using Ordering.Core.Repositories.Command.Base;
-using Ordering.Core.Repositories.Query;
-using Ordering.Core.Repositories.Query.Base;
 using Ordering.Infrastructure;
-using Ordering.Infrastructure.Data;
-using Ordering.Infrastructure.Identity;
-using Ordering.Infrastructure.Repository.Command;
-using Ordering.Infrastructure.Repository.Command.Base;
-using Ordering.Infrastructure.Repository.Query;
-using Ordering.Infrastructure.Repository.Query.Base;
-using Ordering.Infrastructure.Services;
-using System.Reflection;
 using System.Text;
 //using System.Configuration;
 
@@ -145,7 +128,8 @@ var app = builder.Build();
 //    app.UseSwaggerUI();
 //}
 app.UseSwagger();
-app.UseSwaggerUI(c => {
+app.UseSwaggerUI(c =>
+{
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth API V1");
 });
 
@@ -162,7 +146,7 @@ app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
-    var mediator = scope.ServiceProvider.GetRequiredService<IMediator> ();
+    var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
     var ans = await mediator.Send(new GetRoleQuery());
 

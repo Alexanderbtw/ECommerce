@@ -35,7 +35,7 @@ namespace Ordering.Infrastructure.Services
         public async Task<bool> CreateRoleAsync(string roleName)
         {
             var result = await _roleManager.CreateAsync(new IdentityRole(roleName));
-            if(!result.Succeeded)
+            if (!result.Succeeded)
             {
                 throw new ValidationException(result.Errors);
                 //throw new Exception(result.Errors.ToString());
@@ -162,7 +162,7 @@ namespace Ordering.Infrastructure.Services
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
             if (user == null)
             {
-                throw new NotFoundException("User not found");             
+                throw new NotFoundException("User not found");
             }
             var roles = await _userManager.GetRolesAsync(user);
             return (user.Id, user.UserName, user.Email, roles);
@@ -205,7 +205,7 @@ namespace Ordering.Infrastructure.Services
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
-            if(user == null)
+            if (user == null)
             {
                 throw new NotFoundException("User not found");
             }

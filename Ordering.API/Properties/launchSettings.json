@@ -25,7 +25,6 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
-        "ASPNETCORE_HTTPS_PORTS": "7142",
         "ASPNETCORE_HTTP_PORTS": "5142",
         "ConnectionString": "User ID=postgres;Password=my_secret_pass;Host=db;Port=5432;Database=OrderingDb;"
       },

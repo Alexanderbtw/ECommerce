@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Ordering.Core.Entities;
 using Ordering.Infrastructure.Identity;
-using System.Reflection.Emit;
 
 namespace Ordering.Infrastructure.Data
 {
@@ -11,7 +9,7 @@ namespace Ordering.Infrastructure.Data
     //public class OrderingContext : DbContext
     public class OrderingContext : IdentityDbContext<ApplicationUser>
     {
-        public OrderingContext(DbContextOptions<OrderingContext> options) : base (options)
+        public OrderingContext(DbContextOptions<OrderingContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

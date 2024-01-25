@@ -20,7 +20,7 @@ namespace Ordering.Application.Queries.Role
         public async Task<IList<RoleResponseDTO>> Handle(GetRoleQuery request, CancellationToken cancellationToken)
         {
             var roles = await _identityService.GetRolesAsync();
-            return roles.Select(role => new RoleResponseDTO() { Id = role.id, RoleName = role.roleName}).ToList();
+            return roles.Select(role => new RoleResponseDTO() { Id = role.id, RoleName = role.roleName }).ToList();
         }
     }
 }
